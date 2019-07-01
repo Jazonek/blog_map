@@ -1,0 +1,16 @@
+body {
+  background-image: url("/img/background/white_wall/white_wall/white_wall.png");
+}
+nav {
+  background-color: grey;
+}
+.btn {
+  transition: all 150ms;
+}
+.btn:hover {
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.06);
+  transform: scale(0.98);
+}
+nav a:hover {
+  text-shadow: 0px 0px 5px #bbb;
+}

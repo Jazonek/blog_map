@@ -1,0 +1,51 @@
+include ./templates/header
+link(rel="stylesheet", href="css/mapStyle.css")
+include ./templates/navbar
+
+.container.my-5.p-5
+    #photoMap.img-fluid.shadow-sm.p-3.mb-5.bg-white.rounded
+
+#markerModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='markerModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content
+            .modal-header
+                h5#markerModalLabel.modal-title Tytuł zdjęcia
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') ×
+            .modal-body 
+                img.img-fluid(src="/img/photos/warsaw.jpg", alt="")
+                hr
+                p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam amet odit fugiat mollitia, placeat id assumenda dolorum recusandae velit nisi ea quidem soluta eligendi et neque quasi laborum vitae tempora?
+                hr
+                .comments Komentarze
+                    .container.border.border-light.shadow.p-3.mb-5.bg-white.rounded
+                        .row
+                            .col-md
+                                span Kowalski
+                                hr.mt-1
+                        .row
+                            .col-md
+                                span Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum cupiditate tempora illum quas inventore non alias, magnam rerum doloremque exercitationem est. Maxime non animi esse possimus ducimus quae dolorum excepturi.
+                span#formSpan
+                    form
+                        .form-group
+                            label(for='loginInput') Nazwa 
+                            input#loginInput.form-control(name="userName", type='text', aria-describedby='emailHelp', placeholder='Wprowadź nazwę użytkownika')
+                        .form-group
+                            label(for='commentArea') Hasło
+                            textarea#commentArea.form-control(name="comment", rows="3")
+                        button.btn.btn-outline-success(type='submit') Dodaj
+            .modal-footer
+                .col-4
+                    button#commBtn.btn.btn-outline-info.float-right(type='button') Skomentuj
+                .col-5
+                .col-3
+                    button.btn.btn-outline-secondary(type='button', data-dismiss='modal') Close
+            
+
+
+script(src="js/mapScript.js")
+script(src="js/mainScript.js")
+
+
+include ./templates/footer

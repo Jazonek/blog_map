@@ -1,0 +1,38 @@
+include ../templates/header
+link(rel="stylesheet", href="/css/newImg.css")
+include ../templates/navbar
+
+.container.my-5.p-5
+    button#imgAddBtn.btn.btn-outline-success Dodaj zdjęcie
+
+
+
+
+#imgAddForm.modal.fade(tabindex='-1', role='dialog', aria-labelledby='imgAddFormLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content
+            .modal-header
+                h5#imgAddFormLabel.modal-title Dodaj zdjęcie
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+            .modal-body
+                form#fileForm(method="post", action="/admin/nowe-zdjecie",enctype='multipart/form-data')
+                    .form-group
+                        label.link.btn.btn-outline-primary Dodaj plik
+                            input#fileInput(type="file", name="img", hidden="")
+                hr
+                .container
+                    img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
+                    img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
+                    img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
+            .modal-footer
+                .col-3
+                    button#chosImg.btn.btn-outline-success(type='button') Wybierz
+                .col-3
+                    button.btn.btn-outline-danger(type='button') Usuń
+                .col-3
+                .col-3
+                    button.btn.btn-outline-secondary(type='button', data-dismiss='modal') Zamknij
+
+script(src="/js/newImg.js")
+include ../templates/footer

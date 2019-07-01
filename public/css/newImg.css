@@ -1,0 +1,29 @@
+.img {
+  transition: all 250ms;
+}
+img {
+  height: 124px !important;
+  margin: 16px;
+}
+.img:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.imgContainer {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.top-let {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.img-border {
+  border: 2px solid green;
+}
