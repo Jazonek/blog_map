@@ -1,7 +1,73 @@
 include ../templates/header
+link(rel="stylesheet", href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css")
+link(rel="stylesheet", href="/css/tableStyle.css")
 include ../templates/navbar
 
 .container.my-5.p-5
+    p.display-4 Posts
+    if(posts)
+        .container.p-3.m-3
+            table#posts.display(style='width:100%')
+                thead
+                    tr
+                        th ID
+                        th Img
+                        th Lat
+                        th Lng
+                        th Title
+                        th Descr
+                        th 
+                tbody
+                    for post in posts
+                        tr
+                            td #{post.id}
+                            td 
+                                img.tableImg(src=`${post.imgUrl}`, alt="")
+                            td #{post.position.lat}
+                            td #{post.position.lng}
+                            td #{post.title}
+                            td #{post.description}
+                            td
+                                button.btn.btn-danger Usuń
+                tfoot
+                    tr
+                        th ID
+                        th Img
+                        th Lat
+                        th Lng
+                        th Title
+                        th Descr
+                        th 
+    hr.my-5
+    p.display-4 Comments
+    if(comments)
+        .container.p-3.m-3
+            table#comments.display(style='width:100%')
+                thead
+                    tr
+                        th ID
+                        th Post_ID
+                        th Login
+                        th Content
+                        th
+                tbody
+                    for comment in comments
+                        tr
+                            td #{comment.id}
+                            td #{comment.postId}
+                            td #{comment.login}
+                            td #{comment.comment}
+                            td
+                                button.btn.btn-danger Usuń
+                tfoot
+                    tr
+                        th ID
+                        th Post_ID
+                        th Login
+                        th Content
+                        th
 
 
+script(src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
+script(src="/js/dataTable.js")
 include ../templates/footer

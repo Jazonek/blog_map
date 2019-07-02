@@ -5,15 +5,13 @@ const db = low(adapter);
 const shortid = require("shortid");
 
 exports.mainPage = async (req, res) => {
-  const comments = await db
-    .get("comments")
-    .find({})
-    .value();
-  console.log(comments);
+  const comments = await db.get("comments").value();
+  const posts = await db.get("posts").value();
   res.render("mainPage", {
     title: "MainPage",
     log: { name: "Admin", status: res.locals.status },
-    comments: comments
+    comments: comments, //TODO: delete comments from there and make proxy to fetch them while pressing marker
+    potst: posts
   });
 };
 exports.loginPage = async (req, res) => {

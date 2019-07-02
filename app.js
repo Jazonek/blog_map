@@ -3,6 +3,7 @@ const path = require("path");
 const app = express();
 const routesCont = require("./routes/routesCont");
 const routesAdm = require("./routes/routesAdm");
+const api = require("./routes/api-routes");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
@@ -28,6 +29,7 @@ app.use(
 );
 app.use(routesCont);
 app.use("/admin", routesAdm);
+app.use("/api", api);
 
 app.use((req, res, next) => {
   const err = new Error("Page not found");

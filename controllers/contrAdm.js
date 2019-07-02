@@ -13,9 +13,13 @@ exports.addReg = async (req, res) => {
 };
 exports.allContent = async (req, res) => {
   const { status, login } = res.locals;
+  const posts = db.get("posts").value();
+  const comments = db.get("comments").value();
   res.render("admin/allContent.pug", {
     title: "Login",
-    log: { name: login, status: status }
+    log: { name: login, status: status },
+    posts: posts,
+    comments: comments
   });
 };
 exports.newImg = async (req, res) => {
