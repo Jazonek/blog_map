@@ -2,10 +2,10 @@ const attribution =
   '&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png ";
 const tiles = L.tileLayer(tileUrl, { attribution });
-const latlng = L.latLng(52.237049, 21.017532);
+const latlng = L.latLng(40.237049, 15.017532);
 const photoMap = L.map("photoMap", {
   center: latlng,
-  zoom: 5,
+  zoom: 2,
   layers: [tiles]
 });
 

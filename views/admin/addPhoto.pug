@@ -4,7 +4,27 @@ include ../templates/navbar
 
 .container.my-5.p-5
     button#imgAddBtn.btn.btn-outline-success Dodaj zdjęcie
-
+    hr.mt-5.mb-1
+    .container.p-5
+        form(method="post", action='/admin/nowy-wpis')
+            .form-group
+                label.h4(for='image') Zdjęcie
+                #imgPrev
+                input#image(type="hidden", name="img")
+            .form-group
+                label.h4(for='imgMapLat') Mapa
+                #photoMap.img-fluid
+                input#imgMapLat(type="hidden", name="lat")
+                input#imgMapLng(type="hidden", name="lng")
+                span LatLng: 
+                    span#latLng
+            .form-group
+                label.h4(for='imgTitle') Tytuł
+                input#imgTitle.form-control.shadow-sm.p-3.mb-5.bg-white.rounded(type="text", name="title")
+            .form-group
+                label.h4(for='imgDescr') Opis
+                textarea#imgDescr.form-control.shadow-sm.p-3.mb-5.bg-white.rounded(name="descr", cols="30", rows="3")
+            button#addNewPost.btn.btn-outline-success.pt-2(type="submit") Dodaj wpis
 
 
 
@@ -21,7 +41,7 @@ include ../templates/navbar
                         label.link.btn.btn-outline-primary Dodaj plik
                             input#fileInput(type="file", name="img", hidden="")
                 hr
-                .container
+                .container#images
                     img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
                     img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
                     img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
@@ -34,5 +54,6 @@ include ../templates/navbar
                 .col-3
                     button.btn.btn-outline-secondary(type='button', data-dismiss='modal') Zamknij
 
+script(src="/js/addPostMap.js")
 script(src="/js/newImg.js")
 include ../templates/footer

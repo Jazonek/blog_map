@@ -1,12 +1,16 @@
 include ./templates/header
 link(rel="stylesheet", href="css/mapStyle.css")
+link(rel="stylesheet", href="css/mainStyle.css")
 include ./templates/navbar
 
 .container.my-5.p-5
-    #photoMap.img-fluid.shadow-sm.p-3.mb-5.bg-white.rounded
+    p.display-4.mb-1 Photo blog
+    hr.mt-1.mb-4
+    p.mb-5.px-1   &nbsp; Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, commodi. Deserunt consequuntur exercitationem nam voluptate repellendus, officia at eligendi rerum nisi non doloribus unde accusamus quasi praesentium, velit maiores aliquam.Ipsam, inventore. Laboriosam autem aut, provident soluta, temporibus, beatae repellendus iure reiciendis a eius quasi quae distinctio aliquid tenetur ex explicabo doloremque repudiandae. Excepturi autem, corrupti cum reiciendis cumque nesciunt.
+    #photoMap.img-fluid.shadow.p-3.mb-5.bg-white.rounded
 
 #markerModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='markerModalLabel', aria-hidden='true')
-    .modal-dialog(role='document')
+    .modal-dialog.modal-xl(role='document')
         .modal-content
             .modal-header
                 h5#markerModalLabel.modal-title Tytuł zdjęcia
@@ -17,24 +21,26 @@ include ./templates/navbar
                 hr
                 p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam amet odit fugiat mollitia, placeat id assumenda dolorum recusandae velit nisi ea quidem soluta eligendi et neque quasi laborum vitae tempora?
                 hr
-                .comments Komentarze
-                    .container.border.border-light.shadow.p-3.mb-5.bg-white.rounded
-                        .row
-                            .col-md
-                                span Kowalski
-                                hr.mt-1
-                        .row
-                            .col-md
-                                span Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum cupiditate tempora illum quas inventore non alias, magnam rerum doloremque exercitationem est. Maxime non animi esse possimus ducimus quae dolorum excepturi.
+                .comments#comments Komentarze
+                    if(comments)
+                        for comment in comments
+                            .container.border.border-light.shadow.p-3.mb-5.bg-white.rounded.comment
+                                .row
+                                    .col-md
+                                        span #{comment.login}
+                                        hr.mt-1
+                                .row
+                                    .col-md
+                                        span #{comment.comment}
                 span#formSpan
                     form
                         .form-group
-                            label(for='loginInput') Nazwa 
-                            input#loginInput.form-control(name="userName", type='text', aria-describedby='emailHelp', placeholder='Wprowadź nazwę użytkownika')
+                            label(for='loginInput') Login 
+                            input#loginInput.form-control(name="userName", type='text',  placeholder='Wprowadź nazwę użytkownika')
                         .form-group
-                            label(for='commentArea') Hasło
+                            label(for='commentArea') Komentarz
                             textarea#commentArea.form-control(name="comment", rows="3")
-                        button.btn.btn-outline-success(type='submit') Dodaj
+                        button#addComBtn.btn.btn-outline-success(type='submit') Dodaj
             .modal-footer
                 .col-4
                     button#commBtn.btn.btn-outline-info.float-right(type='button') Skomentuj

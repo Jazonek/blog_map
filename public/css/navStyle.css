@@ -1,5 +1,8 @@
+/* Background pattern from Toptal Subtle Patterns */
 body {
   background-image: url("/img/background/white_wall/white_wall/white_wall.png");
+  font-family: "Special Elite", cursive;
+  font-weight: 500;
 }
 nav {
   background-color: grey;

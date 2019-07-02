@@ -2,17 +2,17 @@ include ./templates/header
 include ./templates/navbar
 
 .container.my-5.p-5
-    form
+    form(method="post", action='/logowanie')
         .row.justify-content-center
             .col-md-4
                 .form-group
-                    label(for='loginInput') Nazwa
-                    input#loginInput.form-control.shadow-sm.p-3.mb-5.bg-white.rounded(type='text', aria-describedby='emailHelp', placeholder='Wprowadź nazwę użytkownika')
+                    label.h4(for='loginInput') Login
+                    input#loginInput.form-control.shadow-sm.p-3.mb-5.bg-white.rounded(type='text', aria-describedby='emailHelp', placeholder='Wprowadź nazwę użytkownika',name="login")
         .row.justify-content-center
             .col-md-4
                 .form-group
-                    label(for='passwdInput') Hasło
-                    input#passwdInput.form-control.shadow-sm.p-3.mb-5.bg-white.rounded(type='password', placeholder='Wprowadź hasło')
+                    label.h4(for='passwdInput') Hasło
+                    input#passwdInput.form-control.shadow-sm.p-3.mb-5.bg-white.rounded(type='password', placeholder='Wprowadź hasło',name='passwd')
         .row.justify-content-center
             .col-md-4
                 button.btn.btn-outline-primary(type='submit') Submit

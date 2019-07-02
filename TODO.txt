@@ -1,2 +1,14 @@
 Layer markers GROUP leaflet
 marker cluster markerclusters.js
+
+
+//backup defaults
+db.defaults({
+  images: [],
+  posts: [],
+  comments: [],
+  users: [
+    { id: 1, name: "admin", passwd: "admin" },
+    { id: 2, name: "admin", passwd: "admin2554" }
+  ]
+}).write();

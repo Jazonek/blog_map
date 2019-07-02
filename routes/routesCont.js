@@ -2,8 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const contrCont = require("../controllers/contrCont");
+const authent = require("../controllers/auth");
+router.post("/logowanie", authent.loginStatus, authent.loggingIn);
+router.post("/wyloguj", authent.redirectLogin, authent.logginOut);
+router.post("/nowy-komentarz", contrCont.newComment);
 
-router.get("/", contrCont.mainPage);
-router.get("/zaloguj", contrCont.loginPage);
-
+router.get("/", authent.loginStatus, contrCont.mainPage);
+router.get("/logowanie", authent.loginStatus, contrCont.loginPage);
 module.exports = router;

@@ -1,0 +1,39 @@
+{
+  "images": [
+    {
+      "id": "n-D22K5WR",
+      "url": "/img/photos/warsaw.jpg"
+    }
+  ],
+  "posts": [
+    {
+      "id": "jWEZ0tnnP",
+      "imgUrl": "/img/photos/warsaw.jpg",
+      "position": {
+        "lat": "47.989921667414194",
+        "lng": "9.799804687500002"
+      },
+      "title": "sda",
+      "description": "asd"
+    }
+  ],
+  "comments": [
+    {
+      "id": "Zh6L2h_SU",
+      "login": "Janusz",
+      "comment": "Super fotka byku"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "admin",
+      "passwd": "admin"
+    },
+    {
+      "id": 2,
+      "name": "admin",
+      "passwd": "admin2554"
+    }
+  ]
+}
