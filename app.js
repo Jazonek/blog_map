@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     name: "sid",
-    secret: "somSecreKeys",
+    secret: "somSecretKeys",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -31,14 +31,23 @@ app.use(routesCont);
 app.use("/admin", routesAdm);
 app.use("/api", api);
 
-app.use((req, res, next) => {
-  const err = new Error("Page not found");
-  err.status = 404;
-  next(err);
-});
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.send(err.message);
+app.use(function(req, res, next) {
+  res.status(404);
+
+  // respond with html page
+  if (req.accepts("html")) {
+    res.render("404", { url: req.url, log: { name: "", status: false } });
+    return;
+  }
+
+  // respond with json
+  if (req.accepts("json")) {
+    res.send({ error: "Not found" });
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type("txt").send("Not found");
 });
 
 app.listen(3000, () => console.log("May Node be with you"));
