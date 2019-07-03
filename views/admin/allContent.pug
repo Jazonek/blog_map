@@ -6,7 +6,7 @@ include ../templates/navbar
 .container.my-5.p-5
     p.display-4 Posts
     if(posts)
-        .container.p-3.m-3
+        .container.p-3.m-3.table-container
             table#posts.display(style='width:100%')
                 thead
                     tr
@@ -17,18 +17,21 @@ include ../templates/navbar
                         th Title
                         th Descr
                         th 
+                        th 
                 tbody
                     for post in posts
                         tr
-                            td #{post.id}
+                            td.idP #{post.id}
                             td 
                                 img.tableImg(src=`${post.imgUrl}`, alt="")
                             td #{post.position.lat}
                             td #{post.position.lng}
-                            td #{post.title}
-                            td #{post.description}
+                            td.title #{post.title}
+                            td.descr #{post.description}
                             td
-                                button.btn.btn-danger Usuń
+                                button.btn.btn-info.editPost Edytuj
+                            td
+                                button.btn.btn-danger.remPost Usuń
                 tfoot
                     tr
                         th ID
@@ -37,6 +40,7 @@ include ../templates/navbar
                         th Lng
                         th Title
                         th Descr
+                        th 
                         th 
     hr.my-5
     p.display-4 Comments
@@ -53,12 +57,12 @@ include ../templates/navbar
                 tbody
                     for comment in comments
                         tr
-                            td #{comment.id}
+                            td.idC #{comment.id}
                             td #{comment.postId}
                             td #{comment.login}
                             td #{comment.comment}
                             td
-                                button.btn.btn-danger Usuń
+                                button.btn.btn-danger.remCom Usuń
                 tfoot
                     tr
                         th ID
@@ -66,6 +70,26 @@ include ../templates/navbar
                         th Login
                         th Content
                         th
+
+#editPostModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='editPostModalLabel', aria-hidden='true')
+    .modal-dialog.modal-xl(role='document')
+        .modal-content
+            .modal-header
+                h5#editPostModalLabel.modal-title.h1  Edytuj
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') ×
+            .modal-body.row-fluid
+                form
+                    .form-group
+                        label(for='newTitle') Tytuł 
+                        input#newTitle.form-control(name="userName", type='text',  placeholder='')
+                    .form-group
+                        label(for='newDescr') Opis
+                        textarea#newDescr.form-control(name="comment", rows="3")
+                    button#updatePost.btn.btn-outline-success(type='submit') Zmień
+            .modal-footer
+                    button.btn.btn-outline-secondary(type='button', data-dismiss='modal') Close
+
 
 
 script(src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")

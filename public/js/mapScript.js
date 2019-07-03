@@ -1,32 +1,76 @@
-const attribution =
-  '&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png ";
-const tiles = L.tileLayer(tileUrl, { attribution });
-const latlng = L.latLng(40.237049, 15.017532);
-const photoMap = L.map("photoMap", {
-  center: latlng,
-  zoom: 2,
-  layers: [tiles]
-});
-
-tiles.addTo(photoMap);
-const marker = L.marker(new L.latLng(52.237049, 21.017532)); // Create marker (s, few for example)
-const marker1 = L.marker(new L.latLng(51.237049, 21.017532));
-const marker2 = L.marker(new L.latLng(50.237049, 21.017532));
-const marker3 = L.marker(new L.latLng(50.237049, 20.017532));
-const markers = L.markerClusterGroup(); // create group of them 'markers'
-markers.addLayer(marker); // Add all single markers to markers group
-markers.addLayer(marker1);
-markers.addLayer(marker2);
-markers.addLayer(marker3);
-photoMap.addLayer(markers); // Add markers group to map
-markerOnClick(marker); // Add on click to markers
-markerOnClick(marker1);
-markerOnClick(marker2);
-markerOnClick(marker3);
+mapInit();
+function mapInit() {
+  const attribution =
+    '&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png ";
+  const tiles = L.tileLayer(tileUrl, { attribution });
+  const latlng = L.latLng(40.237049, 15.017532);
+  const photoMap = L.map("photoMap", {
+    center: latlng,
+    zoom: 2,
+    layers: [tiles]
+  });
+  tiles.addTo(photoMap);
+  getMarkers(photoMap);
+}
+async function getMarkers(map) {
+  const posts = await fetch("/api/posts");
+  const jsonPosts = await posts.json();
+  const markers = L.markerClusterGroup();
+  for (let marker of jsonPosts) {
+    let newMarker = L.marker(
+      new L.latLng(marker.position.lat, marker.position.lng),
+      { myCustomId: marker.id }
+    );
+    markerOnClick(newMarker);
+    markers.addLayer(newMarker);
+  }
+  map.addLayer(markers);
+}
 
 function markerOnClick(marker) {
-  marker.on("click", () => {
+  marker.on("click", async function(e) {
     $("#markerModal").modal("toggle");
+    const data = await fetch(`/api/marker/${this.options.myCustomId}`);
+    const json = await data.json();
+    await fillModal(json);
   });
+}
+async function fillModal(data) {
+  const img = `<img id="${data.id}" class="img-fluid mod-img shadow-sm" src="${
+    data.imgUrl
+  }" alt="${data.title}">`;
+  $("#markerModalLabel").text(data.title);
+  $("#imgDescr").text(data.description);
+  $("#modalBody").empty();
+  $("#modalBody").append(img);
+  const request = await fetch(`/api/comment/${data.id}`);
+  const reqJson = await request.json();
+  fillComments(reqJson);
+}
+
+function fillComments(data) {
+  $("#comments").empty();
+  if (data != 0) {
+    $("#comments").append(`Komentarze`);
+    if (data.length > 1) {
+      for (let comm of data) {
+        const comString = `<div class="container border border-light shadow p-3 mb-5 bg-white rounded comment"><div class="row"><div class="col-md"><span>${
+          comm.login
+        } </span><hr class="mt-1" /></div></div><div class="row"><div class="col-md"><span>${
+          comm.comment
+        }</span></div></div></div>`;
+        $("#comments").append(comString);
+      }
+    } else {
+      const comString = `<div class="container border border-light shadow p-3 mb-5 bg-white rounded comment"><div class="row"><div class="col-md"><span>${
+        data[0].login
+      } </span><hr class="mt-1" /></div></div><div class="row"><div class="col-md"><span>${
+        data[0].comment
+      }</span></div></div></div>`;
+      $("#comments").append(comString);
+    }
+  } else {
+    $("#comments").append(`<p>Brak kometarzy</p>`);
+  }
 }

@@ -31,7 +31,7 @@ exports.newImg = async (req, res) => {
     .get("images")
     .push({ id: shortid.generate(), url: url })
     .write().id;
-  res.send({ msg: "Dodano", url: url });
+  res.send("Dodano");
 };
 exports.addPost = async (req, res) => {
   const { img, title, descr, lat, lng } = req.body;
@@ -46,4 +46,36 @@ exports.addPost = async (req, res) => {
     })
     .write().id;
   res.send("success");
+};
+exports.removePost = async (req, res) => {
+  const { id } = req.body;
+  console.log(req.body);
+  const remPost = await db
+    .get("posts")
+    .remove({ id: id })
+    .write();
+  const remComments = await db
+    .get("comments")
+    .remove({ postId: id })
+    .write();
+  res.send("Removed");
+};
+exports.removeComment = async (req, res) => {
+  const { id } = req.body;
+  console.log(req.body);
+  const remComment = await db
+    .get("comments")
+    .remove({ id: id })
+    .write();
+  res.send("Removed");
+};
+exports.editPost = async (req, res) => {
+  const { id, desc, title } = req.body;
+  const updateTitle = await db
+    .get("posts")
+    .find({ id: id })
+    .assign({ title: title })
+    .assign({ description: desc })
+    .write();
+  res.send("Editet");
 };

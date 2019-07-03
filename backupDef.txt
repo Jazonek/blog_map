@@ -1,6 +1,3 @@
-Layer markers GROUP leaflet
-marker cluster markerclusters.js
-
 
 //backup defaults
 db.defaults({

@@ -1,13 +1,13 @@
 body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-        a.navbar-brand(href='#') Navbar
+        a.navbar-brand(href='/') Navbar
         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon
         #navbarSupportedContent.collapse.navbar-collapse
             ul.navbar-nav.mr-auto
                 li.nav-item
-                    a.nav-link(href='/')
-                        | Home 
+                    a.nav-link(href='/about')
+                        | About me 
                 if(log.status === true)
                     li.nav-item
                         a.nav-link(href='/admin/nowy-wpis')

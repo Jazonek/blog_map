@@ -1,9 +1,10 @@
 addImgBtn();
-imgOp();
 selImg();
+delImgs();
 function addImgBtn() {
-  $("#imgAddBtn").on("click", () => {
+  $("#imgAddBtn").on("click", async () => {
     $("#imgAddForm").modal("toggle");
+    fetchImg();
   });
 }
 
@@ -19,7 +20,6 @@ function selImg() {
     else
       $(".chosen").each(function() {
         const chosenImg = $(this).attr("src");
-        console.log(chosenImg);
         $("#imgPrev").empty();
         const img = $('<img class="img-fluid rounded shadow preview">');
         img.attr("src", chosenImg).attr("alt");
@@ -29,10 +29,18 @@ function selImg() {
       });
   });
 }
-function delImgs() {}
-$("#subBtn").on("click", function() {
-  $("#fileForm").submit();
-});
+function delImgs() {
+  $("#delImg").on("click", function() {
+    if (confirm("Jesteś pewny?")) {
+      $(".chosen").each(function() {
+        $(this).hide();
+      });
+    } else {
+      return;
+    }
+  });
+}
+
 //Sending photo to server
 $("#fileInput").on("change", function() {
   $("#fileForm").submit(function(e) {
@@ -43,12 +51,7 @@ $("#fileInput").on("change", function() {
       data: formData,
       success: function(msg) {
         alert(msg.msg);
-        const img = $('<img class="img-fluid rounded shadow img">');
-        img.attr("src", msg.url).attr("alt");
-        img.appendTo("#images");
-        img.on("click", function() {
-          $(this).toggleClass("img-border shadow img chosen");
-        });
+        fetchImg();
       },
       cache: false,
       contentType: false,
@@ -59,3 +62,20 @@ $("#fileInput").on("change", function() {
   });
   $("#fileForm").submit();
 });
+function addImgToDiv(data) {
+  //Appending images in modal
+  $("#images").empty();
+  for (let row of data) {
+    const string = `<img id="${
+      row.id
+    }" class="img-fluid img shadow rounded" src="${row.url}" alt="">`;
+    $("#images").append(string);
+  }
+}
+async function fetchImg() {
+  //Fetch all images and append modal
+  const response = await fetch("/api/zdjecia");
+  const data = await response.json();
+  addImgToDiv(data);
+  imgOp();
+}

@@ -42,14 +42,11 @@ include ../templates/navbar
                             input#fileInput(type="file", name="img", hidden="")
                 hr
                 .container#images
-                    img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
-                    img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
-                    img.img-fluid.img.shadow.rounded(src="/img/photos/warsaw.jpg", alt="")
             .modal-footer
                 .col-3
                     button#chosImg.btn.btn-outline-success(type='button') Wybierz
                 .col-3
-                    button.btn.btn-outline-danger(type='button') Usuń
+                    button#delImg.btn.btn-outline-danger(type='button') Usuń
                 .col-3
                 .col-3
                     button.btn.btn-outline-secondary(type='button', data-dismiss='modal') Zamknij

@@ -8,5 +8,6 @@ router.post("/wyloguj", authent.redirectLogin, authent.logginOut);
 router.post("/nowy-komentarz", contrCont.newComment);
 
 router.get("/", authent.loginStatus, contrCont.mainPage);
+router.get("/about", authent.loginStatus, contrCont.aboutMe);
 router.get("/logowanie", authent.loginStatus, contrCont.loginPage);
 module.exports = router;

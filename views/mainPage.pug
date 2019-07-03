@@ -13,25 +13,15 @@ include ./templates/navbar
     .modal-dialog.modal-xl(role='document')
         .modal-content
             .modal-header
-                h5#markerModalLabel.modal-title Tytuł zdjęcia
+                h5#markerModalLabel.modal-title.h1 
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                     span(aria-hidden='true') ×
-            .modal-body 
-                img.img-fluid(src="/img/photos/warsaw.jpg", alt="")
+            .modal-body.row-fluid
+                #modalBody.text-center
                 hr
-                p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam amet odit fugiat mollitia, placeat id assumenda dolorum recusandae velit nisi ea quidem soluta eligendi et neque quasi laborum vitae tempora?
+                p#imgDescr
                 hr
-                .comments#comments Komentarze
-                    if(comments)
-                        for comment in comments
-                            .container.border.border-light.shadow.p-3.mb-5.bg-white.rounded.comment
-                                .row
-                                    .col-md
-                                        span #{comment.login}
-                                        hr.mt-1
-                                .row
-                                    .col-md
-                                        span #{comment.comment}
+                .comments#comments      
                 span#formSpan
                     form
                         .form-group
@@ -48,7 +38,6 @@ include ./templates/navbar
                 .col-3
                     button.btn.btn-outline-secondary(type='button', data-dismiss='modal') Close
             
-
 
 script(src="js/mapScript.js")
 script(src="js/mainScript.js")

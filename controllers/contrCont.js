@@ -5,12 +5,10 @@ const db = low(adapter);
 const shortid = require("shortid");
 
 exports.mainPage = async (req, res) => {
-  const comments = await db.get("comments").value();
   const posts = await db.get("posts").value();
   res.render("mainPage", {
     title: "MainPage",
     log: { name: "Admin", status: res.locals.status },
-    comments: comments, //TODO: delete comments from there and make proxy to fetch them while pressing marker
     potst: posts
   });
 };
@@ -21,10 +19,21 @@ exports.loginPage = async (req, res) => {
   });
 };
 exports.newComment = async (req, res) => {
-  const { login, comment } = req.body;
+  const { login, comment, postId } = req.body;
   db
     .get("comments")
-    .push({ id: shortid.generate(), login: login, comment: comment })
+    .push({
+      id: shortid.generate(),
+      postId: postId,
+      login: login,
+      comment: comment
+    })
     .write().id;
   res.send("success");
+};
+exports.aboutMe = (req, res) => {
+  res.render("aboutMe", {
+    title: "Login",
+    log: { name: "Admin", status: res.locals.status }
+  });
 };
