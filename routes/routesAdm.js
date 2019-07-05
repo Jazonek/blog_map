@@ -5,6 +5,7 @@ const contrAdm = require("../controllers/contrAdm.js");
 const authent = require("../controllers/auth.js");
 
 router.post("/nowe-zdjecie", authent.redirectLogin, contrAdm.newImg);
+router.post("/gps-latlng", authent.redirectLogin, contrAdm.GPSImgLatLng);
 router.post("/nowy-wpis", authent.redirectLogin, contrAdm.addPost);
 router.post("/remove/post", authent.redirectLogin, contrAdm.removePost);
 router.post("/remove/comment", authent.redirectLogin, contrAdm.removeComment);

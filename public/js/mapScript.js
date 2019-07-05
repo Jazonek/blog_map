@@ -20,16 +20,17 @@ async function getMarkers(map) {
   for (let marker of jsonPosts) {
     let newMarker = L.marker(
       new L.latLng(marker.position.lat, marker.position.lng),
-      { myCustomId: marker.id }
+      { myCustomId: marker.id, title: marker.title }
     );
-    markerOnClick(newMarker);
+    markerOnClick(newMarker, map);
     markers.addLayer(newMarker);
   }
   map.addLayer(markers);
 }
 
-function markerOnClick(marker) {
+function markerOnClick(marker, map) {
   marker.on("click", async function(e) {
+    map.flyTo(marker["_latlng"], 12);
     $("#markerModal").modal("toggle");
     const data = await fetch(`/api/marker/${this.options.myCustomId}`);
     const json = await data.json();
@@ -44,9 +45,9 @@ async function fillModal(data) {
   $("#imgDescr").text(data.description);
   $("#modalBody").empty();
   $("#modalBody").append(img);
-  const request = await fetch(`/api/comment/${data.id}`);
-  const reqJson = await request.json();
-  fillComments(reqJson);
+  // const request = await fetch(`/api/comment/${data.id}`);
+  // const reqJson = await request.json();
+  // fillComments(reqJson);
 }
 
 function fillComments(data) {

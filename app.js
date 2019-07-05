@@ -1,3 +1,5 @@
+const port = process.env.PORT || 3000;
+
 const express = require("express");
 const path = require("path");
 const app = express();
@@ -50,4 +52,4 @@ app.use(function(req, res, next) {
   res.type("txt").send("Not found");
 });
 
-app.listen(3000, () => console.log("May Node be with you"));
+app.listen(port, () => console.log(`May Node be with you at ${port}`));

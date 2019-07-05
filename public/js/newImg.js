@@ -25,6 +25,18 @@ function selImg() {
         img.attr("src", chosenImg).attr("alt");
         img.appendTo("#imgPrev");
         $("#image").val(chosenImg);
+
+        $.ajax({
+          url: "/admin/gps-latlng",
+          type: "post",
+          data: { url: chosenImg },
+          success: function(data) {
+            if (data.lat) $("#latLng").text(`${data.lat} , ${data.lng}`);
+            else if (data.code) {
+              $("#latLng").text(``);
+            }
+          }
+        });
         $("#imgAddForm").modal("toggle");
       });
   });
@@ -50,7 +62,6 @@ $("#fileInput").on("change", function() {
       type: "POST",
       data: formData,
       success: function(msg) {
-        alert(msg.msg);
         fetchImg();
       },
       cache: false,

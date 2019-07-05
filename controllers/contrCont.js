@@ -1,10 +1,11 @@
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync("./data/db.json");
-const db = low(adapter);
+
 const shortid = require("shortid");
 
 exports.mainPage = async (req, res) => {
+  const adapter = new FileSync("./data/db.json");
+  const db = low(adapter);
   const posts = await db.get("posts").value();
   res.render("mainPage", {
     title: "MainPage",
@@ -19,6 +20,8 @@ exports.loginPage = async (req, res) => {
   });
 };
 exports.newComment = async (req, res) => {
+  const adapter = new FileSync("./data/db.json");
+  const db = low(adapter);
   const { login, comment, postId } = req.body;
   db
     .get("comments")

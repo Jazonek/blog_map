@@ -1,11 +1,26 @@
+const FileSync = require("lowdb/adapters/FileSync");
+const low = require("lowdb");
+
 exports.loggingIn = async (req, res) => {
   const { login, passwd } = req.body;
-  //TODO: Create 2 users in db hash password etc. make proper validation
-  if (passwd) {
-    req.session.login = login;
-    req.session.status = true;
-    res.redirect("/");
-  } else {
+  let data = "=" + passwd;
+  let buff = new Buffer.from(data);
+  let decodedPasswd = buff.toString("base64");
+  const adapter = new FileSync("./data/db.json");
+  const db = low(adapter);
+  const user = db
+    .get("users")
+    .find({ name: login })
+    .value();
+  try {
+    if (user.passwd === decodedPasswd) {
+      req.session.login = login;
+      req.session.status = true;
+      res.redirect("/");
+    } else {
+      res.redirect("/logowanie");
+    }
+  } catch (error) {
     res.redirect("/logowanie");
   }
 };

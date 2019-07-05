@@ -1,92 +1,17 @@
 {
-  "images": [
-    {
-      "id": "n-D22K5WR",
-      "url": "/img/photos/warsaw.jpg"
-    },
-    {
-      "id": "3RB-Icrs2",
-      "url": "/img/photos/521811839-copy.jpg"
-    },
-    {
-      "id": "O5gxnIj2Y",
-      "url": "/img/photos/mailingprzepisy1_02.png"
-    }
-  ],
-  "posts": [
-    {
-      "id": "jWEZ0tnnP",
-      "imgUrl": "/img/photos/warsaw.jpg",
-      "position": {
-        "lat": "47.989921667414194",
-        "lng": "9.799804687500002"
-      },
-      "title": "sda",
-      "description": "sadsda sda sdasda  sdasda  sda sda"
-    },
-    {
-      "id": "o4KKfPTmt",
-      "imgUrl": "/img/photos/warsaw.jpg",
-      "position": {
-        "lat": "47.754097979680026",
-        "lng": "19.819335937500004"
-      },
-      "title": "sda",
-      "description": "sadsdasda"
-    },
-    {
-      "id": "oXTaC3TSk",
-      "imgUrl": "/img/photos/mailingprzepisy1_02.png",
-      "position": {
-        "lat": "28.92163128242129",
-        "lng": "20.0830078125"
-      },
-      "title": "sda",
-      "description": "sadsdasda"
-    }
-  ],
-  "comments": [
-    {
-      "id": "YPxqCsmnr",
-      "postId": "o4KKfPTmt",
-      "login": "Janusz",
-      "comment": "Kiedys to było"
-    },
-    {
-      "id": "bZl_EYq1Y",
-      "postId": "jWEZ0tnnP",
-      "login": "Pioter",
-      "comment": "Kozak"
-    },
-    {
-      "id": "n5bhq9wDe",
-      "postId": "oXTaC3TSk",
-      "login": "sda",
-      "comment": "sad"
-    },
-    {
-      "id": "zwqKBkTlF",
-      "postId": "oXTaC3TSk",
-      "login": "asdsdasda",
-      "comment": "sdasdasdasda"
-    },
-    {
-      "id": "ttVBPiq65",
-      "postId": "oXTaC3TSk",
-      "login": "sda",
-      "comment": "sdasadsda"
-    }
-  ],
+  "images": [],
+  "posts": [],
+  "comments": [],
   "users": [
     {
       "id": 1,
-      "name": "admin",
-      "passwd": "admin"
+      "name": "Artur",
+      "passwd": "PWFydHVySl8yMQ=="
     },
     {
       "id": 2,
-      "name": "admin",
-      "passwd": "admin2554"
+      "name": "admin_wj",
+      "passwd": "PWFkbWluMjU1NA=="
     }
   ]
 }
