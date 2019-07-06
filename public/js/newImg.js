@@ -31,8 +31,23 @@ function selImg() {
           type: "post",
           data: { url: chosenImg },
           success: function(data) {
-            if (data.lat) $("#latLng").text(`${data.lat} , ${data.lng}`);
-            else if (data.code) {
+            if (data.lat) {
+              const splitL = data.lat + " ";
+              const arrayL = splitL.split(/[,\ \.]+/);
+              const lat1 = arrayL[0];
+              const lat2 = arrayL[1] / 60;
+              const lat3 = arrayL[2] / (60 * 60);
+              const latitude = parseInt(lat1) + lat2 + lat3;
+              const split = data.lng + " ";
+              const array = split.split(/[,\ \.]+/);
+              const lng1 = array[0];
+              const lng2 = array[1] / 60;
+              const lng3 = array[2] / (60 * 60);
+              const lngitude = parseInt(lng1) + lng2 + lng3;
+              $("#latLng").text(`${latitude} , ${lngitude}`);
+              $("#imgMapLat").val(latitude);
+              $("#imgMapLng").val(lngitude);
+            } else if (data.code) {
               $("#latLng").text(``);
             }
           }

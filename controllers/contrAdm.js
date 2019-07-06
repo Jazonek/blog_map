@@ -61,6 +61,7 @@ exports.addPost = async (req, res) => {
   const adapter = new FileSync("./data/db.json");
   const db = low(adapter);
   const { img, title, descr, lat, lng } = req.body;
+  console.log(lat + " : " + lng);
   const dbOper = await db
     .get("posts")
     .push({
@@ -68,7 +69,8 @@ exports.addPost = async (req, res) => {
       imgUrl: img,
       position: { lat: lat, lng: lng },
       title: title,
-      description: descr
+      description: descr,
+      date: new Date()
     })
     .write().id;
   res.send("success");
