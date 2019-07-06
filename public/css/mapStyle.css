@@ -1,27 +1,27 @@
 @media (min-width: 576px) {
   #photoMap {
-    height: 256px;
+    height: 512px;
     width: 512px;
   }
 }
 
 @media (min-width: 768px) {
   #photoMap {
-    height: 384px;
+    height: 768px;
     width: 768px;
   }
 }
 
 @media (min-width: 992px) {
   #photoMap {
-    height: 512px;
+    height: 768px;
     width: 1024px;
   }
 }
 
 @media (min-width: 1200px) {
   #photoMap {
-    height: 640px;
+    height: 1024px;
     width: 1280px;
   }
 }
