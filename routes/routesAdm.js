@@ -10,6 +10,7 @@ router.post("/nowy-wpis", authent.redirectLogin, contrAdm.addPost);
 router.post("/remove/post", authent.redirectLogin, contrAdm.removePost);
 router.post("/remove/comment", authent.redirectLogin, contrAdm.removeComment);
 router.post("/edit/post", authent.redirectLogin, contrAdm.editPost);
+router.post("/usun-zdjecie", authent.redirectLogin, contrAdm.removeImgs);
 
 router.get("/nowy-wpis", authent.redirectLogin, contrAdm.addReg);
 router.get("/wszystkie-wpisy", authent.redirectLogin, contrAdm.allContent);

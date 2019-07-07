@@ -59,8 +59,17 @@ function selImg() {
 function delImgs() {
   $("#delImg").on("click", function() {
     if (confirm("Jesteś pewny?")) {
+      const imgs = [];
       $(".chosen").each(function() {
-        $(this).hide();
+        imgs.push({ url: $(this).attr("src"), id: $(this).attr("id") });
+      });
+      $.ajax({
+        url: "/admin/usun-zdjecie",
+        type: "post",
+        data: { imgs: imgs },
+        succes: () => {
+          fetchImg();
+        }
       });
     } else {
       return;
@@ -69,9 +78,12 @@ function delImgs() {
 }
 
 //Sending photo to server
-$("#fileInput").on("change", function() {
+createSubmit();
+function createSubmit() {
   $("#fileForm").submit(function(e) {
     const formData = new FormData($(this)[0]);
+    $(this).val("");
+    console.log(formData);
     $.ajax({
       url: "/admin/nowe-zdjecie",
       type: "POST",
@@ -86,6 +98,8 @@ $("#fileInput").on("change", function() {
 
     e.preventDefault();
   });
+}
+$("#fileInput").on("change", function() {
   $("#fileForm").submit();
 });
 function addImgToDiv(data) {

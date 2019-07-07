@@ -61,7 +61,6 @@ exports.addPost = async (req, res) => {
   const adapter = new FileSync("./data/db.json");
   const db = low(adapter);
   const { img, title, descr, lat, lng } = req.body;
-  console.log(lat + " : " + lng);
   const dbOper = await db
     .get("posts")
     .push({
@@ -93,7 +92,6 @@ exports.removeComment = async (req, res) => {
   const adapter = new FileSync("./data/db.json");
   const db = low(adapter);
   const { id } = req.body;
-  console.log(req.body);
   const remComment = await db
     .get("comments")
     .remove({ id: id })
@@ -111,4 +109,19 @@ exports.editPost = async (req, res) => {
     .assign({ description: desc })
     .write();
   res.send("Editet");
+};
+exports.removeImgs = async (req, res) => {
+  const adapter = new FileSync("./data/db.json");
+  const db = low(adapter);
+  const { imgs } = req.body;
+  for (let img of imgs) {
+    let delUrl = await db
+      .get("images")
+      .remove({ id: img.id })
+      .write();
+    fs.unlink(`./public${img.url}`, err => {
+      if (err) throw err;
+    });
+  }
+  res.send("Done");
 };
