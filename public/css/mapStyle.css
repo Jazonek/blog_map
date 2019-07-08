@@ -2,10 +2,16 @@
   #photoMap {
     height: 512px;
   }
+  .mod-img {
+    height: 256px;
+  }
 }
 @media (min-width: 576px) {
   #photoMap {
     height: 512px;
+  }
+  .mod-img {
+    height: 256px;
   }
 }
 
@@ -13,16 +19,25 @@
   #photoMap {
     height: 768px;
   }
+  .mod-img {
+    height: 328px;
+  }
 }
 
 @media (min-width: 992px) {
   #photoMap {
     height: 768px;
   }
+  .mod-img {
+    height: 512px;
+  }
 }
 
 @media (min-width: 1200px) {
   #photoMap {
+    height: 768px;
+  }
+  .mod-img {
     height: 768px;
   }
 }

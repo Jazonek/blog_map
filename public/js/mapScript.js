@@ -30,11 +30,21 @@ async function getMarkers(map) {
 
 function markerOnClick(marker, map) {
   marker.on("click", async function(e) {
-    map.flyTo(marker["_latlng"], 12);
-    $("#markerModal").modal("toggle");
+    zoomMarker(map, marker).then(() => {
+      map.on("zoomend", () => {
+        $("#markerModal").modal("toggle");
+      });
+    });
+
     const data = await fetch(`/api/marker/${this.options.myCustomId}`);
     const json = await data.json();
     await fillModal(json);
+  });
+}
+function zoomMarker(map, marker) {
+  return new Promise((resolve, reject) => {
+    map.flyTo(marker["_latlng"], 15);
+    resolve();
   });
 }
 async function fillModal(data) {
