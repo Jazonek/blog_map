@@ -1,23 +1,6 @@
 {
-  "images": [
-    {
-      "id": "g0Vpzv8tU",
-      "url": "/img/photos/IMG_20190705_080718.jpg"
-    }
-  ],
-  "posts": [
-    {
-      "id": "1L6jYMrry",
-      "imgUrl": "/img/photos/IMG_20190705_080718.jpg",
-      "position": {
-        "lat": "50.14111111111111",
-        "lng": "19.391944444444444"
-      },
-      "title": "Test",
-      "description": "teettsts tss ts ts t",
-      "date": "2019-07-08T19:32:47.787Z"
-    }
-  ],
+  "images": [],
+  "posts": [],
   "comments": [],
   "users": [
     {

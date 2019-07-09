@@ -37,13 +37,19 @@ function selImg() {
               const lat1 = arrayL[0];
               const lat2 = arrayL[1] / 60;
               const lat3 = arrayL[2] / (60 * 60);
-              const latitude = parseInt(lat1) + lat2 + lat3;
+              let latitude = parseInt(lat1) + lat2 + lat3;
+              data.latC == "S"
+                ? (latitude = latitude * -1)
+                : console.log(latitude);
               const split = data.lng + " ";
               const array = split.split(/[,\ \.]+/);
               const lng1 = array[0];
               const lng2 = array[1] / 60;
               const lng3 = array[2] / (60 * 60);
-              const lngitude = parseInt(lng1) + lng2 + lng3;
+              let lngitude = parseInt(lng1) + lng2 + lng3;
+              data.latC == "W"
+                ? (lngitude = lngitude * -1)
+                : console.log(lngitude);
               $("#latLng").text(`${latitude} , ${lngitude}`);
               $("#imgMapLat").val(latitude);
               $("#imgMapLng").val(lngitude);
@@ -108,7 +114,7 @@ function addImgToDiv(data) {
   for (let row of data) {
     const string = `<img id="${
       row.id
-    }" class="img-fluid img shadow rounded" src="${row.url}" alt="">`;
+    }" class="img-fluid img shadow rounded mod-img" src="${row.url}" alt="">`;
     $("#images").append(string);
   }
 }

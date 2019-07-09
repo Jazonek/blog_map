@@ -49,6 +49,8 @@ exports.GPSImgLatLng = async (req, res) => {
       } else {
         const lat = exifData.gps.GPSLatitude;
         const lng = exifData.gps.GPSLongitude;
+        const latC = exifData.gps.GPSLatitudeRef;
+        const lngC = exifData.gps.GPSLongitudeRef;
         const latlng = { lat: lat, lng: lng };
         res.send(latlng);
       }
