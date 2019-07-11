@@ -43,33 +43,33 @@ include ../templates/navbar
                         th 
                         th 
     hr.my-5
-    p.display-4 Comments
-    if(comments)
-        .container.p-3.m-3
-            table#comments.display(style='width:100%')
-                thead
-                    tr
-                        th ID
-                        th Post_ID
-                        th Login
-                        th Content
-                        th
-                tbody
-                    for comment in comments
-                        tr
-                            td.idC #{comment.id}
-                            td #{comment.postId}
-                            td #{comment.login}
-                            td #{comment.comment}
-                            td
-                                button.btn.btn-danger.remCom Usuń
-                tfoot
-                    tr
-                        th ID
-                        th Post_ID
-                        th Login
-                        th Content
-                        th
+    //- p.display-4 Comments
+    //- if(comments)
+    //-     .container.p-3.m-3
+    //-         table#comments.display(style='width:100%')
+    //-             thead
+    //-                 tr
+    //-                     th ID
+    //-                     th Post_ID
+    //-                     th Login
+    //-                     th Content
+    //-                     th
+    //-             tbody
+    //-                 for comment in comments
+    //-                     tr
+    //-                         td.idC #{comment.id}
+    //-                         td #{comment.postId}
+    //-                         td #{comment.login}
+    //-                         td #{comment.comment}
+    //-                         td
+    //-                             button.btn.btn-danger.remCom Usuń
+    //-             tfoot
+    //-                 tr
+    //-                     th ID
+    //-                     th Post_ID
+    //-                     th Login
+    //-                     th Content
+    //-                     th
 
 #editPostModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='editPostModalLabel', aria-hidden='true')
     .modal-dialog.modal-xl(role='document')

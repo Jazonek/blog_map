@@ -63,23 +63,35 @@ exports.addPost = async (req, res) => {
   const adapter = new FileSync("./data/db.json");
   const db = low(adapter);
   const { img, title, descr, lat, lng } = req.body;
-  const dbOper = await db
-    .get("posts")
-    .push({
-      id: shortid.generate(),
-      imgUrl: img,
-      position: { lat: lat, lng: lng },
-      title: title,
-      description: descr,
-      date: new Date()
-    })
-    .write().id;
-  res.send("success");
+  if (!img || !title || !descr || !lat || !lng) {
+    res.status(500).send("Wypełnij wszystkie pola");
+  } else {
+    try {
+      const dbOper = await db
+        .get("posts")
+        .push({
+          id: shortid.generate(),
+          imgUrl: img,
+          position: { lat: lat, lng: lng },
+          title: title,
+          description: descr,
+          date: new Date()
+        })
+        .write().id;
+    } catch (err) {
+      res.status(500).send("Podczas dodawania zdjęcia wystąpił błąd");
+    }
+    res.status(201).send("Pomyślnie dodano zdjęcie");
+  }
 };
 exports.removePost = async (req, res) => {
   const adapter = new FileSync("./data/db.json");
   const db = low(adapter);
   const { id } = req.body;
+  const url = await db
+    .get("posts")
+    .find({ id: id })
+    .value();
   const remPost = await db
     .get("posts")
     .remove({ id: id })
@@ -88,6 +100,14 @@ exports.removePost = async (req, res) => {
     .get("comments")
     .remove({ postId: id })
     .write();
+  let delUrl = await db
+    .get("images")
+    .remove({ url: url.imgUrl })
+    .write();
+  fs.unlink(`./public${url.imgUrl}`, err => {
+    if (err) throw err;
+  });
+
   res.send("Removed");
 };
 exports.removeComment = async (req, res) => {

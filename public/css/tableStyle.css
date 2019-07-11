@@ -1,5 +1,5 @@
 .tableImg {
-  height: 10%;
+  height: 100px !important;
   transition: all 150ms;
 }
 .tableImg:hover {

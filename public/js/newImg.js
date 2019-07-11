@@ -1,5 +1,4 @@
 addImgBtn();
-selImg();
 delImgs();
 function addImgBtn() {
   $("#imgAddBtn").on("click", async () => {
@@ -13,55 +12,7 @@ function imgOp() {
     $(this).toggleClass("img-border shadow img chosen");
   });
 }
-function selImg() {
-  $("#chosImg").on("click", () => {
-    if ($(".chosen").length > 1)
-      alert("Wybierz tylko jedno zdjęcie w celu utworzenia postu");
-    else
-      $(".chosen").each(function() {
-        const chosenImg = $(this).attr("src");
-        $("#imgPrev").empty();
-        const img = $('<img class="img-fluid rounded shadow preview">');
-        img.attr("src", chosenImg).attr("alt");
-        img.appendTo("#imgPrev");
-        $("#image").val(chosenImg);
 
-        $.ajax({
-          url: "/admin/gps-latlng",
-          type: "post",
-          data: { url: chosenImg },
-          success: function(data) {
-            if (data.lat) {
-              const splitL = data.lat + " ";
-              const arrayL = splitL.split(/[,\ \.]+/);
-              const lat1 = arrayL[0];
-              const lat2 = arrayL[1] / 60;
-              const lat3 = arrayL[2] / (60 * 60);
-              let latitude = parseInt(lat1) + lat2 + lat3;
-              data.latC == "S"
-                ? (latitude = latitude * -1)
-                : console.log(latitude);
-              const split = data.lng + " ";
-              const array = split.split(/[,\ \.]+/);
-              const lng1 = array[0];
-              const lng2 = array[1] / 60;
-              const lng3 = array[2] / (60 * 60);
-              let lngitude = parseInt(lng1) + lng2 + lng3;
-              data.latC == "W"
-                ? (lngitude = lngitude * -1)
-                : console.log(lngitude);
-              $("#latLng").text(`${latitude} , ${lngitude}`);
-              $("#imgMapLat").val(latitude);
-              $("#imgMapLng").val(lngitude);
-            } else if (data.code) {
-              $("#latLng").text(``);
-            }
-          }
-        });
-        $("#imgAddForm").modal("toggle");
-      });
-  });
-}
 function delImgs() {
   $("#delImg").on("click", function() {
     if (confirm("Jesteś pewny?")) {
@@ -73,7 +24,7 @@ function delImgs() {
         url: "/admin/usun-zdjecie",
         type: "post",
         data: { imgs: imgs },
-        succes: () => {
+        success: () => {
           fetchImg();
         }
       });

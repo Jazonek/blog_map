@@ -30,15 +30,20 @@ async function getMarkers(map) {
 
 function markerOnClick(marker, map) {
   marker.on("click", async function(e) {
-    zoomMarker(map, marker).then(() => {
-      map.on("zoomend", () => {
-        $("#markerModal").modal("toggle");
-      });
-    });
-
     const data = await fetch(`/api/marker/${this.options.myCustomId}`);
     const json = await data.json();
     await fillModal(json);
+    let zoom = await zoomMarker(map, marker).then(() => {
+      if (map.getZoom() < 10) {
+        setTimeout(() => {
+          $("#markerModal").modal("toggle");
+        }, 3000);
+      } else {
+        setTimeout(() => {
+          $("#markerModal").modal("toggle");
+        }, 500);
+      }
+    });
   });
 }
 function zoomMarker(map, marker) {

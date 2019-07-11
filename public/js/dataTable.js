@@ -55,7 +55,7 @@ function editPost() {
 
 function delPost() {
   $(".remPost").on("click", function() {
-    if (confirm("Jesteś pewny?")) {
+    if (confirm("Jesteś pewny? \n Wraz z postem zostanie usunięte zdjęcie")) {
       const id = $(this)
         .closest("tr")
         .find(".idP")
@@ -68,6 +68,9 @@ function delPost() {
           console.log(data);
         }
       });
+      $(this)
+        .closest("tr")
+        .hide();
     } else {
       return;
     }
