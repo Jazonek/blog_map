@@ -2,16 +2,5 @@
   "images": [],
   "posts": [],
   "comments": [],
-  "users": [
-    {
-      "id": 1,
-      "name": "Artur",
-      "passwd": "PWFydHVySl8yMQ=="
-    },
-    {
-      "id": 2,
-      "name": "admin_wj",
-      "passwd": "PWFkbWluMjU1NA=="
-    }
-  ]
+  "users": []
 }
